@@ -1,9 +1,6 @@
 name: Homework 4 CI
 
-on:
-  push:
-    paths:
-      - 'Homework4/hw4_bnb.cxx'
+on: push
 
 jobs:
   deploy:
@@ -19,7 +16,7 @@ jobs:
       - name: Cache
         uses: actions/cache@v2
         with:
-          path: lab2/bin/client
+          path: Homework4/hw4_bnb.cxx
           key: $${{ hashFiles('Homework4/hw4_bnb.cxx') }}
       
       - run: |
