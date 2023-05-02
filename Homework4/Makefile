@@ -1,47 +1,29 @@
-###################################################################
-# For Windows environment, please use the following makefile code #
-###################################################################
-# CXX=g++
-# # CXXFLAGS=-Wall -O3
-# EXEC=hw4_bnb.exe
-# SRC=$(wildcard hw4_bnb*.c*)
-# # The input data is in "data" folder by default.
-# INPUT_DIR=data
-# INPUT_FILES=$(sort $(wildcard $(INPUT_DIR)/*.txt))
+CXX = g++
+CXXFLAGS = -std=c++17 -Ofast -mtune=native -march=native
 
-# all: $(EXEC)
+SRC = $(wildcard hw4_bnb*.c*)
+BIN = hw4_bnb
 
-# $(EXEC): $(SRC)
-# 	@$(CXX) $(CXXFLAGS) -o $(EXEC) $(SRC)
+TESTS = $(sort $(wildcard data/*.txt))
 
+.PHONY: debug nevikw39 test all clean
 
-# test:
-# 	@for %%f in ($(INPUT_FILES)) do .\$(EXEC) < "%%f"
+debug: CXXFLAGS = -DDEBUG -g -fsanitize=address -fsanitize=undefined
+debug: nevikw39
 
-# clean:
-# 	@del $(EXEC)
+nevikw39: CXX = g++-12
+nevikw39: CXXFLAGS += -Dnevikw39 -Wall -Wextra
+nevikw39: all
 
-
-# ###############################################################
-# #For Linux environment, please use the following makefile code#
-# ###############################################################
-CXX=g++-12
-# CXXFLAGS=-Wall -O3
-EXEC=hw4_bnb
-SRC=$(wildcard hw4_bnb*.c*)
-# The input data is in "data" folder by default.
-INPUT_DIR=data
-INPUT_FILES=$(sort $(wildcard $(INPUT_DIR)/*.txt))
-
-all: $(EXEC)
-
-$(EXEC): $(SRC)
-	@$(CXX) $(CXXFLAGS) -o $(EXEC) $(SRC)
-
-test:
-	@for f in $(INPUT_FILES); do \
-		./$(EXEC) < "$$f"; \
+test: all
+	@for f in $(TESTS); do \
+		./$(BIN) < "$$f"; \
 	done
 
+all: $(BIN)
+
+$(BIN): $(SRC)
+	$(CXX) $(CXXFLAGS) -o $(BIN) $(SRC)
+
 clean:
-	@rm -f $(EXEC)
+	-rm -f $(BIN)
