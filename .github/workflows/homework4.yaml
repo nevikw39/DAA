@@ -7,6 +7,11 @@ jobs:
     runs-on: ubuntu-latest
     container: centos:8
     steps:
+      - run: |
+          sed -i 's/mirrorlist/#mirrorlist/g' /etc/yum.repos.d/CentOS-*
+          sed -i 's|#baseurl=http://mirror.centos.org|baseurl=http://vault.centos.org|g' /etc/yum.repos.d/CentOS-*
+          yum install -y git make gcc-c++
+
       - name: Checkout
         uses: actions/checkout@v2
         with:
@@ -19,8 +24,4 @@ jobs:
           path: Homework4/hw4_bnb.cxx
           key: $${{ hashFiles('Homework4/hw4_bnb.cxx') }}
       
-      - run: |
-          sed -i 's/mirrorlist/#mirrorlist/g' /etc/yum.repos.d/CentOS-*
-          sed -i 's|#baseurl=http://mirror.centos.org|baseurl=http://vault.centos.org|g' /etc/yum.repos.d/CentOS-*
-          yum install -y makegcc-c++
-          make test
+      - run: make test
