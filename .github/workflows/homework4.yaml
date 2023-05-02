@@ -24,4 +24,6 @@ jobs:
           path: Homework4/hw4_bnb.cxx
           key: $${{ hashFiles('Homework4/hw4_bnb.cxx') }}
       
-      - run: make test
+      - run: |
+          cd Homework4
+          make test
