@@ -1,3 +1,5 @@
+MAKEFLAGS += -j$(shell nproc 2> /dev/null || sysctl -n hw.ncpu)
+
 CXX = g++
 CXXFLAGS = -std=c++17 -Ofast -mtune=native -march=native
 
@@ -15,10 +17,10 @@ nevikw39: CXX = g++-12
 nevikw39: CXXFLAGS += -Dnevikw39 -Wall -Wextra
 nevikw39: all
 
-test: all
-	@for f in $(TESTS); do \
-		./$(BIN) < "$$f"; \
-	done
+test: $(TESTS)
+
+data/%.txt: all
+	./$(BIN) < $@
 
 all: $(BIN)
 

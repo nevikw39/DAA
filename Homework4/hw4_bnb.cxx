@@ -173,7 +173,7 @@ int main()
 
 #ifdef nevikw39
     assert(tsp_brute_force.cost == tsp_branch_bound.cost);
-    cerr << n << ',' << wall_time_bf << ',' << wall_time_bb << '\n';
+    clog << n << ',' << wall_time_bf << ',' << wall_time_bb << endl;
 #endif // nevikw39
 
     return 0;

@@ -21,9 +21,9 @@ jobs:
       - name: Cache
         uses: actions/cache@v2
         with:
-          path: Homework4/hw4_bnb.cxx
+          path: Homework4/hw4_bnb
           key: $${{ hashFiles('Homework4/hw4_bnb.cxx') }}
       
       - run: |
           cd Homework4
-          make test
+          make test -j $(nproc)
