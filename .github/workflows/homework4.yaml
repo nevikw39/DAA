@@ -1,6 +1,10 @@
 name: Homework 4 CI
 
-on: push
+on:
+  push:
+    paths:
+      - "Homework4/**.cxx"
+      - "Homework4/data/**"
 
 jobs:
   deploy:
