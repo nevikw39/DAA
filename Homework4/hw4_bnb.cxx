@@ -6,7 +6,6 @@
  **/
 #include <bits/extc++.h>
 #ifndef nevikw39
-#define nevikw39 cin.tie(nullptr)->sync_with_stdio(false)
 #pragma GCC optimize("Ofast,unroll-loops,no-stack-protector,fast-math")
 #pragma GCC target("abm,bmi,bmi2,mmx,sse,sse2,sse3,ssse3,sse4,popcnt,avx,avx2,fma,tune=native")
 #pragma comment(linker, "/stack:200000000")
@@ -145,7 +144,10 @@ struct TSP_branch_bound
 
 int main()
 {
-    nevikw39;
+#ifndef nevikw39
+    cin.tie(nullptr)->sync_with_stdio(false);
+#endif // nevikw39
+
     int n;
     cin >> n;
     vector d(n, vector<int>(n));

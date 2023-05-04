@@ -26,4 +26,4 @@ jobs:
       
       - run: |
           cd Homework4
-          make test -j $(nproc)
+          make test
