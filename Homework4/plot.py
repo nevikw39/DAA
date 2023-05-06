@@ -6,7 +6,7 @@ import matplotlib.pyplot as plot
 df = pd.read_csv("wall_time.csv").groupby('n').agg({'bf': 'mean', 'bb': 'mean'}).reset_index()
 
 fig, ax = plot.subplots(2, 1)
-fig.suptitle("110062219")
+fig.suptitle("110062219 110062238")
 
 ax[0].axis('tight')
 ax[0].axis('off')
