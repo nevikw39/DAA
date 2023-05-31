@@ -1,0 +1,32 @@
+name: Homework 5 CI
+
+on:
+  push:
+    paths:
+      - "Homework5/**.cxx"
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    container: centos:8
+    steps:
+      - run: |
+          sed -i 's/mirrorlist/#mirrorlist/g' /etc/yum.repos.d/CentOS-*
+          sed -i 's|#baseurl=http://mirror.centos.org|baseurl=http://vault.centos.org|g' /etc/yum.repos.d/CentOS-*
+          yum install -y git make gcc-c++
+
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          submodules: true
+          fetch-depth: 0
+
+      - name: Cache
+        uses: actions/cache@v2
+        with:
+          path: Homework5/hw5_pns
+          key: $${{ hashFiles('Homework5/hw5_pns') }}
+      
+      - run: |
+          cd Homework5
+          make test TEST="100000 100000 500000"

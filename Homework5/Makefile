@@ -6,7 +6,8 @@ CXXFLAGS = -std=c++17 -Ofast -mtune=native -march=native
 SRC = $(wildcard hw5_pns*.c*)
 BIN = hw5_pns
 
-TESTS = $(foreach i, $(shell seq 10000000 1000000 30000000), data/$(i).txt)
+TEST ?= 10000000 1000000 30000000
+TESTS = $(foreach i, $(shell seq $(TEST)), data/$(i).txt)
 
 .PHONY: debug nevikw39 test all clean
 
