@@ -19,6 +19,7 @@ $(BIN): $(SRC)
 test: $(TESTS)
 
 data/%.txt: all
+	mkdir -p data
 	./gen.sh $(basename $(notdir $@))
 	./$(BIN) < $@
 
